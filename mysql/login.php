@@ -1,3 +1,17 @@
+<?php 
+  if (isset($_POST['submit'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    
+    $connection = mysqli_connect('localhost', 'root', 'mysql', 'cms');
+    
+    if ($connection){
+      echo 'we are connected';
+    } else {
+      die("database connection failed");
+    }
+  }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +23,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="col-xs-6">
+      <div class="col-sm-6">
         <form action="login.php" method="POST">
           <div class="form-group">
             <label for="username">Username</label>
