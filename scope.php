@@ -13,7 +13,7 @@
       }
       
       echo $x . "<br>";
-      
+      global $x;
       convert();
       echo $x;
     ?>
