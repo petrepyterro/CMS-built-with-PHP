@@ -1,13 +1,6 @@
 <?php 
   include "db.php";
-  $query = "SELECT * FROM users";
-
-  $result = mysqli_query($connection, $query);
-
-  if (!$result){
-    echo "Query failed" . mysqli_error($connection);
-  }
-  
+  include "functions.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +26,9 @@
           
           <div class="form-group">
             <select name="" id="">
-              <option value="">1</option>
+              <?php 
+                showAllData();
+              ?>
             </select>
           </div>
           <input type="submit" class="btn btn-primary" name="submit" value="Update"/>
