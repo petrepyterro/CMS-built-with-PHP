@@ -1,25 +1,8 @@
 <?php 
-  if (isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    $connection = mysqli_connect('localhost', 'root', 'mysql', 'cms');
-    
-    if ($connection){
-      echo 'we are connected';
-    } else {
-      die("database connection failed");
-    }
-    
-    $query = "INSERT INTO users(username, password) ";
-    $query .= "VALUES ('$username', '$password')";
-    
-    $result = mysqli_query($connection, $query);
-    
-    if (!$result){
-      echo "Query failed" . mysqli_error($connection);
-    }
-  }
+  include "db.php";
+  include "functions.php";
+  
+  createRows();
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,6 +16,7 @@
   <body>
     <div class="container">
       <div class="col-sm-6">
+        <h1 class="text-center">Create</h1>
         <form action="login_create.php" method="POST">
           <div class="form-group">
             <label for="username">Username</label>
@@ -43,7 +27,7 @@
             <input type="password" name="password" class="form-control" />
           </div>
           
-          <input type="submit" class="btn btn-primary" name="submit" value="Submit"/>
+          <input type="submit" class="btn btn-primary" name="submit" value="Create"/>
         </form>
       </div>
     </div>
