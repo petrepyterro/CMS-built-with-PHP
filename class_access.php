@@ -21,7 +21,7 @@ $semi = new Semi();
 
 class Semi extends Car{
   function showProperty(){
-    echo $this->hood;
+    echo $this->engine;
   }
 }
 
