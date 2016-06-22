@@ -17,7 +17,7 @@
             <?php 
               $query = "SELECT * FROM posts";
               
-              $select_all_posts_query = mysqli_query($connectiuon, $query);
+              $select_all_posts_query = mysqli_query($connection, $query);
           
               while($row = mysqli_fetch_assoc($select_all_posts_query)){
                 $post_title = $row['post_title'];
