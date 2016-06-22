@@ -63,7 +63,7 @@
                   }
                 ?>
                 
-                <?php 
+                <?php //DELETE QUERY
                   if(isset($_GET['delete'])){
                     $get_cat_id = $_GET['delete'];
                     $query = "DELETE FROM categories WHERE cat_id = $get_cat_id ";
@@ -71,6 +71,8 @@
                     if (!$delete_query){
                       die("QUERY FAILED" . mysqli_error($connection));
                     } 
+                    header("Location: categories.php");
+                    
                   }
                 ?>
               </tbody>
