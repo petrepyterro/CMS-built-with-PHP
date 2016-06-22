@@ -16,20 +16,7 @@
           
           <div class="col-xs-6">
             <?php 
-              if (isset($_POST['submit'])){
-                $cat_title = $_POST['cat_title'];
-                if (strlen(trim($cat_title)) == 0){
-                  echo "This field should not be empty";
-                } else {
-                  $query = "INSERT INTO categories(cat_title) ";
-                  $query .= "VALUES('$cat_title') ";
-                  
-                  $create_category_query = mysqli_query($connection, $query);
-                  if (!$create_category_query){
-                    die("QUERY FAILED " . mysqli_error($connection));
-                  }
-                }
-              }
+              insert_categories();
             ?>
             <form action="" method="POST">
               <div class="form-group">
@@ -57,30 +44,11 @@
               </thead>
               <tbody>
                 <?php //find all categories
-                  $query = "SELECT * FROM categories";
-                  $select_categories = mysqli_query($connection, $query);
-                  while($row = mysqli_fetch_assoc($select_categories)){
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
-                    echo "<tr><td>$cat_id</td>";
-                    echo "<td>$cat_title</td>";
-                    echo "<td><a href='categories.php?delete=$cat_id'>DELETE</a></td>";
-                    echo "<td><a href='categories.php?edit=$cat_id'>EDIT</a></td>";
-                    echo "</tr>";
-                  }
+                  findAllCategories();
                 ?>
                 
                 <?php //DELETE QUERY
-                  if(isset($_GET['delete'])){
-                    $get_cat_id = $_GET['delete'];
-                    $query = "DELETE FROM categories WHERE cat_id = $get_cat_id ";
-                    $delete_query = mysqli_query($connection, $query);
-                    if (!$delete_query){
-                      die("QUERY FAILED" . mysqli_error($connection));
-                    } 
-                    header("Location: categories.php");
-                    
-                  }
+                  deleteCategories();
                 ?>
               </tbody>
             </table>
