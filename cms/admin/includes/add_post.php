@@ -14,6 +14,12 @@
     $post_comment_count = 4;
     
     move_uploaded_file($post_image_temp, "../images/$post_image");
+    
+    $query = "INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_comment_count,post_status) ";
+    $query .= "VALUES($post_category_id, '$post_title', '$post_author',now(), '$post_image', '$post_content', '$post_tags', $post_comment_count, '$post_status')";
+    
+    $create_post_query = mysqli_query($connection, $query);
+    confirmQuery($create_post_query, $query);
   }
 ?>
 <form action="" method="POST" enctype="multipart/form-data">
@@ -42,7 +48,7 @@
     <input type="text" class="form-control" name="post_tags"/>
   </div>
   <div class="form-group">
-    <label for="post_author">Post Author</label>
+    <label for="post_content">Post Content</label>
     <textarea name="post_content" id="" cols="30" rows="10" class="form-control"></textarea>
   </div>
   <div class="form-group">
