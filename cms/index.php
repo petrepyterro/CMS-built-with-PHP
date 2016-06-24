@@ -18,7 +18,7 @@
               $query = "SELECT * FROM posts";
               
               $select_all_posts_query = mysqli_query($connection, $query);
-          
+              $all_not_published = true;
               while($row = mysqli_fetch_assoc($select_all_posts_query)){
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
@@ -26,8 +26,13 @@
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'],0,50);
+                $post_status = $row['post_status'];
                 
-            ?>
+                if ($post_status ==='published'){
+                  $all_not_published = false;
+                  
+                
+              ?>
             
                 <h1 class="page-header">
                 Page Heading
@@ -49,7 +54,11 @@
                 <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                 <hr>
             
-            <?php } ?>
+                <?php }} 
+                  if ($all_not_published){
+                    echo "<h1 class='text-center'>No Posts Published, Sorry</h1>";
+                  }
+                ?>
             
           </div>
 
