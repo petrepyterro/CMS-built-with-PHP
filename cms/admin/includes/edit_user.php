@@ -31,22 +31,17 @@
     $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
     $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
     
-    /*
-    $query = 'UPDATE posts SET ';
-    $query .= "post_title = '$post_title', "; 
-    $query .= "post_category_id = $post_category_id, "; 
-    $query .= "post_date = now(), ";
-    $query .= "post_author = '$post_author', "; 
-    $query .= "post_status = '$post_status', "; 
-    $query .= "post_tags = '$post_tags', "; 
-    $query .= "post_content = '$post_content', "; 
-    $query .= "post_image = '$post_image' "; 
-    $query .= "WHERE post_id = $the_post_id";
-    
-    $update_post = mysqli_query($connection, $query);
-    confirmQuery($update_post, $query);
-     * 
-     */
+
+    $query = 'UPDATE users SET ';
+    $query .= "user_firstname = '$user_firstname', "; 
+    $query .= "user_lastname = '$user_lastname', "; 
+    $query .= "user_role = '$user_role', ";
+    $query .= "username = '$username', "; 
+    $query .= "user_email = '$user_email', "; 
+    $query .= "user_password = '$user_password' ";
+    $query .= "WHERE user_id=$the_user_id";
+    $update_user = mysqli_query($connection, $query);
+    confirmQuery($update_user, $query);
   }
      
 ?>
@@ -61,10 +56,10 @@
   </div>
   <div class="form-group">
     <select name="user_role" id="">
-      <option value="<?php echo $user_role == 'admin' ? 'admin' : 'subscriber' ?>"><?php echo $user_role ?></option>
+      <option value="subscriber"><?php echo $user_role ?></option>
       <?php 
         if ($user_role == 'admin'){
-          echo "<option value=subscriber'>Subscriber</option>";
+          echo "<option value='subscriber'>Subscriber</option>";
         } else {
           echo "<option value='admin'>Admin</option>";
         }
