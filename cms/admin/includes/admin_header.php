@@ -4,6 +4,15 @@
 <?php 
   ob_start(); 
   session_start();
+  
+  
+  if (isset($_SESSION['role'])){
+    if ($_SESSION['role'] == 'subscriber'){
+      header("Location: ../index.php");
+    }
+  } else {
+    header("Location: ../index.php");
+  } 
 ?>
 
 <!DOCTYPE html>
