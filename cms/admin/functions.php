@@ -9,7 +9,7 @@ function confirmQuery($result, $query){
 function insert_categories(){
   global $connection;
   if (isset($_POST['submit'])){
-    $cat_title = $_POST['cat_title'];
+    $cat_title = mysqli_real_escape_string($_POST['cat_title']);
     if (strlen(trim($cat_title)) == 0){
       echo "This field should not be empty";
     } else {
