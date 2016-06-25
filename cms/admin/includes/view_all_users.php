@@ -14,9 +14,9 @@
   <tbody>
     <?php 
       $query = "SELECT * FROM users";
-      $select_comments = mysqli_query($connection, $query);
+      $select_users = mysqli_query($connection, $query);
 
-      while ($row = mysqli_fetch_assoc($select_comments)){
+      while ($row = mysqli_fetch_assoc($select_users)){
         $user_id = $row['user_id'];
         $username = $row['username'];
         $user_firstname = $row['user_firstname'];
@@ -43,11 +43,11 @@
 
 <?php 
   if (isset($_GET['delete'])){
-    $the_comment_id = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id=$the_comment_id";
+    $the_user_id = $_GET['delete'];
+    $query = "DELETE FROM users WHERE user_id=$the_user_id";
     $delete_query = mysqli_query($connection, $query);
     
-    header("Location: comments.php");
+    header("Location: users.php");
   }
   
   if (isset($_GET['unapprove'])){
