@@ -61,9 +61,14 @@
   </div>
   <div class="form-group">
     <select name="user_role" id="">
-      <option value="subscriber"><?php echo $user_role ?></option>
-      <option value="admin">Admin</option>
-      <option value="subscriber">Subscriber</option>
+      <option value="<?php echo $user_role == 'admin' ? 'admin' : 'subscriber' ?>"><?php echo $user_role ?></option>
+      <?php 
+        if ($user_role == 'admin'){
+          echo "<option value=subscriber'>Subscriber</option>";
+        } else {
+          echo "<option value='admin'>Admin</option>";
+        }
+      ?>
     </select>
   </div>
   <div class="form-group">
