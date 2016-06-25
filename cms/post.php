@@ -63,9 +63,9 @@
         <?php 
           if (isset($_POST['create_comment'])){
             $the_post_id = $_GET['p_id'];
-            $comment_author = mysqli_real_escape_string($_POST['comment_author']);
-            $comment_email = mysqli_real_escape_string($_POST['comment_email']);
-            $comment_content = mysqli_real_escape_string($_POST['comment_content']);
+            $comment_author = mysqli_real_escape_string($connection, $_POST['comment_author']);
+            $comment_email = mysqli_real_escape_string($connection, $_POST['comment_email']);
+            $comment_content = mysqli_real_escape_string($connection, $_POST['comment_content']);
             
             $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
             $query .= "VALUES($the_post_id, '$comment_author', '$comment_email', '$comment_content', 'Unapproved', now())";
