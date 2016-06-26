@@ -21,6 +21,8 @@
     $create_users_query = mysqli_query($connection, $query);
     confirmQuery($create_users_query, $query);
     
+    echo "User Created: ". " " . "<a href='users.php'>View Users</a>";
+    
   }
 ?>
 <form action="" method="POST" enctype="multipart/form-data">
