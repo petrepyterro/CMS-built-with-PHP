@@ -20,3 +20,17 @@ tinymce.init({
     {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
   ]
 });
+
+$(document).ready(function(){
+  $('#selectAllBoxes').click(function(event){
+    if(this.checked){
+      $('.checkBoxes').each(function(){
+        this.checked = true;
+      })
+    } else {
+      $('.checkBoxes').each(function(){
+        this.checked = false;
+      })
+    }
+  })
+});
