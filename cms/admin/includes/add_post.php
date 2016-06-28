@@ -19,6 +19,8 @@
     
     $create_post_query = mysqli_query($connection, $query);
     confirmQuery($create_post_query, $query);
+    $the_last_post_id = mysqli_insert_id($connection);
+    echo "<p class='bg-success'>Your post was added. <a href='posts.php'>View All Posts</a> or <a href='../post.php?p_id=$the_last_post_id'>View Post</a></p>";
   }
 ?>
 <form action="" method="POST" enctype="multipart/form-data">
