@@ -29,10 +29,6 @@
       
       header("Location: ../admin");
     } else {
-      $_SESSION['username'] = $db_username;
-      $_SESSION['firstname'] = $db_user_firstname;
-      $_SESSION['lastname'] = $db_user_lastname;
-      $_SESSION['role'] = $db_user_role;
       header("Location: ../index.php");
     } 
   }
