@@ -15,12 +15,19 @@
     <li><a href="../index.php">HOME SITE</a></li>
     
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+      <?php 
+        if (isset($_SESSION['username'])){
+          $username = $_SESSION['username']; 
+      ?> 
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $username ?> <b class="caret"></b></a>
+      <?php } ?>
       <ul class="dropdown-menu">
-        <li>
-          <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-        </li>
-        <li class="divider"></li>
+        <?php if (isset($_SESSION['username'])){ ?>
+          <li>
+            <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
+          </li>
+          <li class="divider"></li>
+        <?php } ?>
         <li>
           <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
         </li>
