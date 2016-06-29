@@ -1,7 +1,30 @@
 <?php  include "includes/db.php"; ?>
 <?php  include "includes/header.php"; ?>
 
-
+  <?php 
+    if (isset($_POST['submit'])){
+      $username = mysqli_real_escape_string($connection,$_POST['username']);
+      $email = mysqli_real_escape_string($connection,$_POST['email']);
+      $password = mysqli_real_escape_string($connection,$_POST['password']);
+      
+      if (!empty($username) && !empty($email) && !empty($password)){
+        
+        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+        $query .= "VALUES('$username', '$email', '$password', 'subscriber')";
+        $register_user_query = mysqli_query($connection, $query);
+        if (!$register_user_query){
+          die('Query failed' . mysqli_error($connection));
+        }
+        
+        $message = "Your Registration has been submitted.";
+        
+      } else {
+        echo "Fields cannot be empty";
+      }
+    } else {
+      $message = "";
+    }
+  ?>
   <!-- Navigation -->
 
   <?php  include "includes/navigation.php"; ?>
@@ -17,6 +40,7 @@
             <div class="form-wrap">
             <h1>Register</h1>
             <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+              <h6 class="text-center"><?php echo $message; ?></h6>
               <div class="form-group">
                 <label for="username" class="sr-only">username</label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
