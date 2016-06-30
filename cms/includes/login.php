@@ -19,6 +19,7 @@
       $db_user_firstname = $row['user_firstname'];
       $db_user_lastname = $row['user_lastname'];
       $db_user_role = $row['user_role'];
+      $db_user_salt = $row['randSalt'];
     }
     
     if ($username === $db_username && $password === $db_user_password){
@@ -30,6 +31,6 @@
       header("Location: ../admin");
     } else {
       header("Location: ../index.php");
-    } 
+    }  
   }
 ?>
