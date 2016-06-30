@@ -17,7 +17,17 @@
             
             <?php 
               if (isset($_GET['p_id'])){
-                $the_post_id = $_GET['p_id'];
+                
+                
+              } else {
+                header("Location: index.php");
+              }
+              $the_post_id = $_GET['p_id'];
+              $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id=$the_post_id";
+              $send_query = mysqli_query($connection, $view_query);
+              
+              if (!$send_query){
+                die('Query failed' . mysqli_error($connection));
               }
               
               $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
@@ -31,7 +41,7 @@
                 $post_image = $row['post_image'];
                 $post_content = $row['post_content'];
                 
-            ?>
+              ?>
             
                 <h1 class="page-header">
                 Page Heading
@@ -52,7 +62,7 @@
                 <p><?php echo $post_content ?></p>
                 <hr>
             
-            <?php } ?>
+              <?php } ?>
             
           </div>
           <!-- Blog Sidebar Widgets Column -->
