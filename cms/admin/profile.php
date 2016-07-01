@@ -47,14 +47,27 @@
               $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
               $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
 
+              if(!empty($user_password)){
+                $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+                $query_password = "SELECT  user_password FROM users WHERE user_id = $the_user_id_profile";
+                $getUserPassword = mysqli_query($connection, $query_password);
+                confirmQuery($getUserPassword, $query_password);
 
+                $row = mysqli_fetch_array($getUserPassword);
+                $db_user_password = $row['user_password'];
+                if(!password_verify($user_password, $db_user_password)){
+                  $user_hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+                } else {
+                  $user_hashed_password = $db_user_password;
+                }
+              }
               $query = 'UPDATE users SET ';
               $query .= "user_firstname = '$user_firstname', "; 
               $query .= "user_lastname = '$user_lastname', "; 
               $query .= "user_role = '$user_role', ";
               $query .= "username = '$username', "; 
               $query .= "user_email = '$user_email', "; 
-              $query .= "user_password = '$user_password' ";
+              $query .= "user_password = '$user_hashed_password' ";
               $query .= "WHERE username='$username'";
               $update_user = mysqli_query($connection, $query);
               confirmQuery($update_user, $query);

@@ -15,8 +15,6 @@
 
       $db_username = $row['username'];
       $db_user_email = $row['user_email'];
-      $db_user_hashed_password = $row['user_password'];
-      $db_user_salt = $row['randSalt'];
     }
     
   }
@@ -31,7 +29,22 @@
     $username = mysqli_real_escape_string($connection,$_POST['username']);
     $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
     $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
-    $user_hashed_password = crypt($user_password, $db_user_salt);
+    
+    if(!empty($user_password)){
+      $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+      $query_password = "SELECT  user_password FROM users WHERE user_id = $the_user_id";
+      $getUserPassword = mysqli_query($connection, $query_password);
+      confirmQuery($getUserPassword, $query_password);
+      
+      $row = mysqli_fetch_array($getUserPassword);
+      $db_user_password = $row['user_password'];
+      if(!password_verify($user_password, $db_user_password)){
+        $user_hashed_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+      } else {
+        $user_hashed_password = $db_user_password;
+      }
+    }
+    
     
 
     $query = 'UPDATE users SET ';
