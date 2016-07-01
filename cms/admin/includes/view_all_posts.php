@@ -75,6 +75,7 @@
         <option value="published">Publish</option>
         <option value="draft">Draft</option>
         <option value="delete">Delete</option>
+        <option value="clone">Clone</option>
         <option value="reset_views_count">Reset Views Count</option>
         
       </select>
