@@ -5,17 +5,13 @@
     if (isset($_POST['submit'])){
       $username = mysqli_real_escape_string($connection,$_POST['username']);
       $email = mysqli_real_escape_string($connection,$_POST['email']);
-      $password = mysqli_real_escape_string($connection,$_POST['password']);
-      
+      $password = mysqli_real_escape_string($connection,$_POST['password']);      
       
       if (!empty($username) && !empty($email) && !empty($password)){
-        $query = "SELECT randSalt FROM users limit 1";
-        $select_default_rand = mysqli_query($connection, $query);
-        while($row = mysqli_fetch_assoc($select_default_rand)){
-          $salt = $row['randSalt'];
-        };
         
-        $password = crypt($password, $salt);
+        
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+        
         $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
         $query .= "VALUES('$username', '$email', '$password', 'subscriber')";
         $register_user_query = mysqli_query($connection, $query);
@@ -26,7 +22,7 @@
         $message = "Your Registration has been submitted.";
         
       } else {
-        echo "Fields cannot be empty";
+        $message = "Fields cannot be empty";
       }
     } else {
       $message = "";
