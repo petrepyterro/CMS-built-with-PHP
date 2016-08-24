@@ -92,8 +92,8 @@
           }
           echo "<td><a href='../post.php?p_id=$comment_post_id'>$comment_post_title</a></td>";
           echo "<td>$comment_date</td>";
-          echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
-          echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
+          echo "<td><a href='comments.php?approved=$comment_id'>Approve</a></td>";
+          echo "<td><a href='comments.php?unapproved=$comment_id'>Unapprove</a></td>";
           echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
           echo "</tr>";
         }

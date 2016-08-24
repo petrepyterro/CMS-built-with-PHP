@@ -107,9 +107,9 @@
           }
           echo "<td><a href='../post.php?p_id=$comment_post_id'>$comment_post_title</a></td>";
           echo "<td>$comment_date</td>";
-          echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
-          echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
-          echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
+          echo "<td><a href='post_comments.php?approved=$comment_id&id=" . $_GET['id'] . "'>Approve</a></td>";
+          echo "<td><a href='post_comments.php?unapproved=$comment_id&id=" . $_GET['id'] . "'>Unapprove</a></td>";
+          echo "<td><a href='post_comments.php?delete=$comment_id&id=" . $_GET['id'] . "'>Delete</a></td>";
           echo "</tr>";
         }
       ?>
@@ -124,7 +124,7 @@
     $query = "DELETE FROM comments WHERE comment_id=$the_comment_id";
     $delete_query = mysqli_query($connection, $query);
     
-    header("Location: comments.php");
+    header("Location: post_comments.php?id=" . $_GET['id']);
   }
   
   if (isset($_GET['unapproved'])){
@@ -134,7 +134,7 @@
     $query .= "WHERE comment_id=$the_comment_id";
     $delete_query = mysqli_query($connection, $query);
     
-    header("Location: comments.php");
+    header("Location: post_comments.php?id=" . $_GET['id']);
   }
   
   if (isset($_GET['approved'])){
@@ -144,7 +144,7 @@
     $query .= "WHERE comment_id=$the_comment_id";
     $delete_query = mysqli_query($connection, $query);
     
-    header("Location: comments.php");
+    header("Location: post_comments.php?id=" . $_GET['id']);
   }
 ?>
 
