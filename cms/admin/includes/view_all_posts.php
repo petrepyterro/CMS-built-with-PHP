@@ -145,7 +145,7 @@
           $comment_id = $row['comment_id'];
           $count_comments = mysqli_num_rows($send_comment_query);
           
-          echo "<td><a href='comment.php?id=$comment_id'>$count_comments</a></td>";
+          echo "<td><a href='post_comments.php?id=$post_id'>$count_comments</a></td>";
           
           echo "<td>$post_date</td>";
           if ($post_views_count != 0){

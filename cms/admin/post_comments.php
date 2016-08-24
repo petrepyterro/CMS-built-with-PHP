@@ -1,3 +1,18 @@
+<?php include "includes/admin_header.php" ?>
+
+  <div id="wrapper">
+
+  <!-- Navigation -->
+  <?php include "includes/admin_navigation.php" ?>
+  <div id="page-wrapper">
+    <div class="container-fluid">
+      <!-- Page Heading -->
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">
+            Welcome to Comments
+            <small>Author</small>
+          </h1>
 <?php 
   if (isset($_POST['checkBoxArray'])){
     foreach($_POST['checkBoxArray'] as $commentValueId){
@@ -53,7 +68,7 @@
     </thead>
     <tbody>
       <?php 
-        $query = "SELECT * FROM comments";
+        $query = "SELECT * FROM comments WHERE comment_post_id =" . mysqli_real_escape_string($connection, $_GET['id']);
         $select_comments = mysqli_query($connection, $query);
 
         while ($row = mysqli_fetch_assoc($select_comments)){
@@ -132,3 +147,14 @@
     header("Location: comments.php");
   }
 ?>
+
+        </div>
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container-fluid -->
+
+  </div>
+  <!-- /#page-wrapper -->
+  <?php include "includes/admin_footer.php" ?>
