@@ -84,9 +84,9 @@
               $insert_comment_query = mysqli_query($connection, $query);
               confirmQuery($insert_comment_query, $query);
 
-              $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
-              $increment_post_comment_count_query = mysqli_query($connection, $query);
-              confirmQuery($increment_post_comment_count_query, $query);
+              //$query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = $the_post_id";
+              //$increment_post_comment_count_query = mysqli_query($connection, $query);
+              //confirmQuery($increment_post_comment_count_query, $query);
             } else {
               echo "<script>alert('Fields cannot be empty')</script>";
             }         
