@@ -7,7 +7,7 @@
 
     while ($row = mysqli_fetch_assoc($select_posts_by_id)){
       $post_title = $row['post_title'];
-      $post_author = $row['post_author'];
+      $post_user = $row['post_user'];
       $post_category_id = $row['post_category_id'];
       $post_status = $row['post_status'];
       $post_image = $row['post_image'];
@@ -20,7 +20,7 @@
   }
   if(isset($_POST['update_post'])){
     $post_title = mysqli_real_escape_string($connection, $_POST['post_title']);
-    $post_author = mysqli_real_escape_string($connection, $_POST['post_author']);
+    $post_user = mysqli_real_escape_string($connection, $_POST['post_user']);
     $post_category_id = $_POST['post_category'];
     $post_status = mysqli_real_escape_string($connection, $_POST['post_status']);
     $post_image = $_FILES['post_image']['name'];
@@ -42,7 +42,7 @@
     $query .= "post_title = '$post_title', "; 
     $query .= "post_category_id = $post_category_id, "; 
     $query .= "post_date = now(), ";
-    $query .= "post_author = '$post_author', "; 
+    $query .= "post_user = '$post_user', "; 
     $query .= "post_status = '$post_status', "; 
     $query .= "post_tags = '$post_tags', "; 
     $query .= "post_content = '$post_content', "; 
@@ -61,6 +61,7 @@
     <input type="text" value="<?php echo $post_title ?>" name="post_title" class="form-control" />
   </div>
   <div class="form-group">
+    <label for="post_category">Categories</label>
     <select name="post_category" id="">
       <?php
         $query = "SELECT * FROM categories";
@@ -75,8 +76,20 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="post_author">Post Author</label>
-    <input type="text" value="<?php echo $post_author ?>" class="form-control" name="post_author"/>
+    <label for="post_user">Author</label>
+    <select name="post_user" id="">
+      <?php
+        $query = "SELECT * FROM users";
+        $select_users = mysqli_query($connection, $query);
+        confirmQuery($select_users, $query);
+        echo "<option value='$post_user'>$post_user</option>";
+        while($row = mysqli_fetch_assoc($select_users)){
+          $user_id = $row['user_id'];
+          $username = $row['username'];
+          echo "<option value='$username'>$username</option>";
+        };
+      ?>
+    </select>
   </div>
   <div class="form-group">
     <select name="post_status" id="">

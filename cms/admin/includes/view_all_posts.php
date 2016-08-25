@@ -127,9 +127,9 @@
           echo "";
           echo "<td>$post_id</td>";
           
-          if(isset($post_author) || !empty(trim($post_author))){
+          if(!empty(trim($post_author))){
             echo "<td>$post_author</td>";
-          } elseif(isset($post_user) || !empty(trim($post_user))) {
+          } elseif(!empty(trim($post_user))) {
             echo "<td>$post_user</td>";
           } else {
             echo "<td></td>";
