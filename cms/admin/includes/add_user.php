@@ -1,15 +1,15 @@
 <?php 
   if (isset($_POST['create_user'])){
-    $user_firstname = mysqli_real_escape_string($connection, $_POST['user_firstname']);
-    $user_lastname = mysqli_real_escape_string($connection, $_POST['user_lastname']);
-    $user_role = mysqli_real_escape_string($connection, $_POST['user_role']);
+    $user_firstname = escape($_POST['user_firstname']);
+    $user_lastname = escape($_POST['user_lastname']);
+    $user_role = escape($_POST['user_role']);
     
     //$post_image = $_FILES['post_image']['name'];
     //$post_image_temp = $_FILES['post_image']['tmp_name'];
     
-    $username = mysqli_real_escape_string($connection,$_POST['username']);
-    $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
-    $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+    $username = escape($_POST['username']);
+    $user_email = escape($_POST['user_email']);
+    $user_password = escape($_POST['user_password']);
     //$post_date = date('d-m-y');
     
     //move_uploaded_file($post_image_temp, "../images/$post_image");

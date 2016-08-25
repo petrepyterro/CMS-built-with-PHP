@@ -1,7 +1,8 @@
 <?php 
   if (isset($_POST['checkBoxArray'])){
     foreach($_POST['checkBoxArray'] as $postValueId){
-      $bulkOptions = $_POST['bulk_options'];
+      $bulkOptions = escape($_POST['bulk_options']);
+      $postValueId = escape($postValueId);
       switch($bulkOptions){
         case 'published':
           $query = "UPDATE posts SET post_status = '$bulkOptions' WHERE post_id = $postValueId";
@@ -127,9 +128,9 @@
           echo "";
           echo "<td>$post_id</td>";
           
-          if(!empty(trim($post_author))){
+          if(!empty($post_author)){
             echo "<td>$post_author</td>";
-          } elseif(!empty(trim($post_user))) {
+          } elseif(!empty($post_user)) {
             echo "<td>$post_user</td>";
           } else {
             echo "<td></td>";
@@ -176,7 +177,7 @@
 
 <?php 
   if (isset($_GET['delete'])){
-    $the_post_id = $_GET['delete'];
+    $the_post_id = escape($_GET['delete']);
     $query = "DELETE FROM posts WHERE post_id=$the_post_id";
     $delete_query = mysqli_query($connection, $query);
     
@@ -184,8 +185,8 @@
   }
   
   if (isset($_GET['reset'])){
-    $the_post_id = $_GET['reset'];
-    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id=" . mysqli_real_escape_string($connection, $_GET['reset']) . " ";
+    $the_post_id = escape($_GET['reset']);
+    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id=" . escape($_GET['reset']) . " ";
     $delete_query = mysqli_query($connection, $query);
     
     header("Location: posts.php");

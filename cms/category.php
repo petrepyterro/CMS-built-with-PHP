@@ -16,7 +16,7 @@
             
             <?php 
               if (isset($_GET['category'])){
-                $the_cat_id = $_GET['category'];
+                $the_cat_id = escape($_GET['category']);
               }
               $query = "SELECT * FROM posts WHERE post_category_id = $the_cat_id";
               

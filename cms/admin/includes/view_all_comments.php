@@ -1,7 +1,8 @@
 <?php 
   if (isset($_POST['checkBoxArray'])){
     foreach($_POST['checkBoxArray'] as $commentValueId){
-      $bulkOptions = $_POST['bulk_options'];
+      $commentValueId = escape($commentValueId);
+      $bulkOptions = escape($_POST['bulk_options']);
       switch($bulkOptions){
         case 'approved':
           $query = "UPDATE comments SET comment_status = '$bulkOptions' WHERE comment_id = $commentValueId";
@@ -105,7 +106,7 @@
 
 <?php 
   if (isset($_GET['delete'])){
-    $the_comment_id = $_GET['delete'];
+    $the_comment_id = escape($_GET['delete']);
     $query = "DELETE FROM comments WHERE comment_id=$the_comment_id";
     $delete_query = mysqli_query($connection, $query);
     
@@ -113,7 +114,7 @@
   }
   
   if (isset($_GET['unapproved'])){
-    $the_comment_id = $_GET['unapproved'];
+    $the_comment_id = escape($_GET['unapproved']);
     $query = "UPDATE comments ";
     $query .= "SET comment_status='unapproved' ";
     $query .= "WHERE comment_id=$the_comment_id";
@@ -123,7 +124,7 @@
   }
   
   if (isset($_GET['approved'])){
-    $the_comment_id = $_GET['approved'];
+    $the_comment_id = escape($_GET['approved']);
     $query = "UPDATE comments ";
     $query .= "SET comment_status='approved' ";
     $query .= "WHERE comment_id=$the_comment_id";

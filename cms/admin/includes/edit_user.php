@@ -1,7 +1,7 @@
 <?php 
 
   if (isset($_GET['u_id'])){
-    $the_user_id = $_GET['u_id'];
+    $the_user_id = escape($_GET['u_id']);
     $query = "SELECT * FROM users WHERE user_id=$the_user_id";
     $select_user_by_id = mysqli_query($connection, $query);
 
@@ -19,19 +19,19 @@
     
   
     if(isset($_POST['update_user'])){
-      $user_firstname = mysqli_real_escape_string($connection, $_POST['user_firstname']);
-      $user_lastname = mysqli_real_escape_string($connection, $_POST['user_lastname']);
-      $user_role = mysqli_real_escape_string($connection, $_POST['user_role']);
+      $user_firstname = escape( $_POST['user_firstname']);
+      $user_lastname = escape( $_POST['user_lastname']);
+      $user_role = escape( $_POST['user_role']);
 
       //$post_image = $_FILES['post_image']['name'];
       //$post_image_temp = $_FILES['post_image']['tmp_name'];
 
-      $username = mysqli_real_escape_string($connection,$_POST['username']);
-      $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
-      $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+      $username = escape($_POST['username']);
+      $user_email = escape($_POST['user_email']);
+      $user_password = escape($_POST['user_password']);
 
       if(!empty($user_password)){
-        $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+        $user_password = escape($_POST['user_password']);
         $query_password = "SELECT  user_password FROM users WHERE user_id = $the_user_id";
         $getUserPassword = mysqli_query($connection, $query_password);
         confirmQuery($getUserPassword, $query_password);
