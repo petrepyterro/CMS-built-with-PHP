@@ -18,15 +18,19 @@
             <?php 
               if (isset($_GET['category'])){
                 $the_cat_id = escape($_GET['category']);
-              
-                $query = "SELECT * FROM posts WHERE post_category_id = $the_cat_id AND post_status='published'";
-
-                $select_all_published_posts_filtered_by_category_query = mysqli_query($connection, $query);
                 
-                if(mysqli_num_rows($select_all_published_posts_filtered_by_category_query) < 1){
+                if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+                  $query = "SELECT * FROM posts WHERE post_category_id = $the_cat_id";
+                } else {
+                  $query = "SELECT * FROM posts WHERE post_category_id = $the_cat_id AND post_status='published'";
+                }  
+
+                $select_posts_filtered_by_category_query = mysqli_query($connection, $query);
+                
+                if(mysqli_num_rows($select_posts_filtered_by_category_query) < 1){
                   echo "<h1>No posts published for this category</h1>";
                 } else {
-                  while($row = mysqli_fetch_assoc($select_all_published_posts_filtered_by_category_query)){
+                  while($row = mysqli_fetch_assoc($select_posts_filtered_by_category_query)){
                     $post_id = $row['post_id'];
                     $post_title = $row['post_title'];
                     $post_author = $row['post_author'];
