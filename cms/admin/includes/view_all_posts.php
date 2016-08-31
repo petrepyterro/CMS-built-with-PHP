@@ -31,6 +31,7 @@
           while($row=  mysqli_fetch_assoc($select_post_by_id)){
             $post_title = $row['post_title'];
             $post_author = $row['post_author'];
+            $post_user = $row['post_user'];
             $post_category_id = $row['post_category_id'];
             $post_status = $row['post_status'];
             $post_image = $row['post_image'];
@@ -39,8 +40,8 @@
             $post_comment_count = 0;
           }
           
-          $query = "INSERT INTO posts (post_title, post_author, post_category_id, post_status, post_image, post_content, post_tags, post_comment_count, post_date) ";
-          $query .= "VALUES('$post_title', '$post_author', $post_category_id, '$post_status', '$post_image', '$post_content', '$post_tags', $post_comment_count, now())";
+          $query = "INSERT INTO posts (post_title, post_author, post_user, post_category_id, post_status, post_image, post_content, post_tags, post_comment_count, post_date) ";
+          $query .= "VALUES('$post_title', '$post_author', '$post_user', $post_category_id, '$post_status', '$post_image', '$post_content', '$post_tags', $post_comment_count, now())";
           $insert_cloned_post  = mysqli_query($connection, $query);
           if (!$insert_cloned_post){
             die("Query failed. " . mysqli_error($connection));
