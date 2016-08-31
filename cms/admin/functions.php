@@ -89,3 +89,14 @@ function escape($string){
   return mysqli_real_escape_string($connection, trim($string));
 }
 
+function recordCount($table){
+  global $connection;
+  
+  $query = "SELECT * FROM " . $table;
+  $select_all = mysqli_query($connection, $query);
+  
+  $result = mysqli_num_rows($select_all);
+  
+  confirmQuery($result, $query);
+  return $result;
+}
