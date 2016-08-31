@@ -108,22 +108,14 @@
           </div>
         </div>
       </div><!-- /.row -->
-      <?php 
-        $query = "SELECT * FROM posts WHERE post_status = 'draft'";
-        $select_all_draft_posts = mysqli_query($connection, $query); 
-        $count_draft_posts = mysqli_num_rows($select_all_draft_posts);
+      <?php  
+        $count_draft_posts = recordConditionedCount('posts', 'post_status', 'draft');
         
-        $query = "SELECT * FROM posts WHERE post_status = 'published'";
-        $select_all_published_posts = mysqli_query($connection, $query); 
-        $count_published_posts = mysqli_num_rows($select_all_published_posts);
+        $count_published_posts = recordConditionedCount('posts', 'post_status', 'published');
         
-        $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
-        $select_all_unapproved_comments = mysqli_query($connection, $query); 
-        $count_unapproved_comments = mysqli_num_rows($select_all_unapproved_comments);
+        $count_unapproved_comments = recordConditionedCount('comments', 'comment_status', 'unapproved');
         
-        $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-        $select_all_subscriber_users = mysqli_query($connection, $query); 
-        $count_subscriber_users = mysqli_num_rows($select_all_subscriber_users);
+        $count_subscriber_users = recordConditionedCount('users', 'user_role', 'subscriber');
       ?>
       <div class="row">
         <script type="text/javascript">

@@ -100,3 +100,12 @@ function recordCount($table){
   confirmQuery($result, $query);
   return $result;
 }
+
+function recordConditionedCount($table, $column, $status){
+  global $connection;
+  
+  $query = "SELECT * FROM $table WHERE $column = '$status'";
+  $result = mysqli_query($connection, $query);
+  
+  return mysqli_num_rows($result);
+}
